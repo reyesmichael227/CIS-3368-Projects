@@ -1,5 +1,5 @@
 # Michael Reyes 
-# PSID:
+# PSID: 2011032
 import mysql.connector
 from mysql.connector import Error
 #uses mysql.connector import to start establishing connecting between vscode and mysql
