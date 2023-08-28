@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Captain Management</title>
+  <%- include('../Views/nav')-%>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <h1>Captain Overview</h1>
+ <!--WORKING-->
+  <table id="captain-table" border="1">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Rank</th>
+        <th>Home Planet</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (captain.length) { %>
+        <% captain.forEach(captain => { %>
+          <tr>
+            <td><%= captain.firstname %></td>
+            <td><%= captain.lastname %></td>
+            <td><%= captain.captainrank %></td>
+            <td><%= captain.homeplanet %></td>
+          </tr>
+        <% }); %>
+      <% } else { %>
+        <tr>
+          <td colspan="5">No captain found.</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <!--WORKING-->
+  <h2>Add Captain</h2>
+  <form id="add-captain-form" method="post">
+    <label for="firstname">First Name:</label>
+    <input type="text" id="firstname" name="firstname" required><br><br>
+
+    <label for="lastname">Last Name:</label>
+    <input type="text" id="lastname" name="lastname" required><br><br>
+
+    <label for="captainrank">Rank:</label>
+    <input type="text" id="captainrank" name="captainrank" required><br><br>
+
+    <label for="homeplanet">Home Planet:</label>
+    <input type="text" id="homeplanet" name="homeplanet" required><br><br>
+
+    <button type="submit">Add Captain</button>
+  </form>
+
+
+  <h2>Update/Delete Captain</h2>
+  <form id="update-delete-captain-form">
+    <label for="captain-id">Captain ID: </label>
+    <input type="number" name="captain-id" id="captain-id" required>
+    <br>
+    <label for="new-firstname">New First Name: </label>
+    <input type="text" name="new-firstname">
+    <br>
+    <label for="new-lastname">New Last Name: </label>
+    <input type="text" name="new-lastname">
+    <br>
+    <label for="new-captainrank">New Rank: </label>
+    <input type="text" name="new-captainrank">
+    <br>
+    <label for="new-homeplanet">New Home Planet: </label>
+    <input type="text" name="new-homeplanet">
+    <br>
+    <button type="button" id="update-captain">Update Captain</button>
+    <button type="button" id="delete-captain">Delete Captain</button>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/js/captain.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cargo Management System</title>
+  <%- include('../Views/nav')-%>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 80%;
+      margin-top: 20px;
+      margin-bottom: 50px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    form {
+      margin: 0 auto;
+      width: 80%;
+      margin-bottom: 50px;
+    }
+
+    label {
+      display: inline-block;
+      width: 20%;
+      text-align: right;
+      margin-right: 10px;
+    }
+
+    input[type=text], input[type=number] {
+      width: 70%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button[type=submit] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button[type=submit]:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Current Cargo List</h1>
+  <!--Working-->
+  <table id="cargo-table" border="1">
+    <thead>
+      <tr>
+        <th>Weight</th>
+        <th>Cargo Type</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+        <th>Ship ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (cargo.length) { %>
+        <% cargo.forEach(cargo => { %>
+          <tr>
+            <td><%= cargo.weight %></td>
+            <td><%= cargo.cargotype %></td>
+            <td><%= cargo.departure %></td>
+            <td><%= cargo.arrival %></td>
+            <td><%= cargo.shipid %></td>
+          </tr>
+        <% }); %>
+      <% } else { %>
+        <tr>
+          <td colspan="5">No current cargo found.</td>
+        </tr>
+      <% } %>
+    </tbody>    
+  </table>
+  <!--WORKING-->
+  <h2>Add Cargo</h2>
+  <form id="add-cargo-form" method="post">
+    <label for="weight">Weight:</label>
+    <input type="text" id="weight" name="weight">
+
+    <label for="cargotype">Cargo Type:</label>
+    <input type="text" id="cargotype" name="cargotype">
+
+    <label for="departure">Departure:</label>
+    <input type="text" id="departure" name="departure">
+
+    <label for="arrival">Arrival:</label>
+    <input type="text" id="arrival" name="arrival">
+
+    <label for="shipid">Ship ID:</label>
+    <input type="text" id="shipid" name="shipid">
+
+    <button type="submit">Add Cargo</button>
+  </form>
+  <h2>Update Cargo</h2>
+<form id="update-cargo-form" method="put">
+  <label for="cargo-id">Cargo ID: </label>
+  <input type="number" name="cargo-id" id="cargo-id" required><br><br>
+
+  <label for="new-weight">New Weight: </label>
+  <input type="text" name="new-weight" id="new-weight"><br><br>
+
+  <label for="new-cargotype">New Cargo Type: </label>
+  <input type="text" name="new-cargotype" id="new-cargotype"><br><br>
+
+  <label for="new-departure">New Departure: </label>
+  <input type="text" name="new-departure" id="new-departure"><br><br>
+
+  <label for="new-arrival">New Arrival: </label>
+  <input type="text" name="new-arrival" id="new-arrival"><br><br>
+
+  <label for="new-shipid">New Ship ID: </label>
+  <input type="text" name="new-shipid" id="new-shipid"><br><br>
+
+  <button type="submit">Update Cargo</button>
+</form>
+
+<script>
+  const updateCargoForm = document.querySelector('#update-cargo-form');
+  const updateCargoUrl = '/cargo/update/';
+
+  updateCargoForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const cargoId = document.querySelector('#cargo-id').value;
+    const newWeight = document.querySelector('#new-weight').value;
+    const newCargoType = document.querySelector('#new-cargotype').value;
+    const newDeparture = document.querySelector('#new-departure').value;
+    const newArrival = document.querySelector('#new-arrival').value;
+    const newShipId = document.querySelector('#new-shipid').value;
+
+    axios.put(updateCargoUrl + cargoId, {
+      weight: newWeight,
+      cargotype: newCargoType,
+      departure: newDeparture,
+      arrival: newArrival,
+      shipid: newShipId
+    })
+    .then((response) => {
+      console.log(response);
+      alert('Cargo updated successfully!');
+      location.reload();
+    })
+    .catch((error) => {
+      console.log(error);
+      alert('Error updating cargo.');
+    });
+  });
+</script>
+</body>
+</html>

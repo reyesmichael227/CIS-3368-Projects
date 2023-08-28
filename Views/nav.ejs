@@ -1,0 +1,56 @@
+<style>
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .inner {
+        max-width: 900px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .masthead-brand {
+        margin: 0;
+    }
+    
+    .nav {
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+    
+    .nav-link {
+        padding: 0.5rem 1rem;
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+    }
+    
+    .nav-link:hover {
+        color: #fff;
+        background-color: #6c757d;
+    }
+    
+    .nav-link.active {
+        color: #fff;
+        background-color: #007bff;
+    }
+</style>
+<header class="masthead mb-auto">
+    <div class="inner">
+        <h3 class="masthead-brand">Final Project</h3>
+        <nav class="nav nav-masthead justify-content-center">
+            <a id='cargo' class="nav-link" href="/cargo">Cargo</a>
+            <a id='spaceship' class="nav-link" href="/spaceship">Spaceship</a>
+            <a id='captain' class="nav-link" href="/captain">Captain</a>
+            <a id='log-out' class="nav-link" href="/">Log Out</a>
+        </nav>
+    </div>
+</header>
